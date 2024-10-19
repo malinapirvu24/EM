@@ -75,8 +75,8 @@ gamma_2 = abs(Bs(46,1)); % theta+1 - Matlab indexing
 
 %% Search space
 
-E2r_values = linspace(0.8, 1.2, 21); % 1
-H_values = linspace(0.008, 0.012, 21); % 0.01
+E2r_values = linspace(0.5, 1.5, 21); % 1
+H_values = linspace(0.005, 0.015, 21); % 0.01
 
 for i = 1:length(E2r_values)
     for j = 1:length(H_values)
@@ -95,8 +95,8 @@ end
 
 figure;  
 mesh(E2rGrid, HGrid, abs(cost));  
-xlabel('E2r');  
-ylabel('H');  
+xlabel('ε2_r');  
+ylabel('h[m]');  
 zlabel('Cost');  
 title('Mesh Plot of Cost Function'); 
 
