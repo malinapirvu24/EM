@@ -1,2 +1,0 @@
-# EM
-Assignment - TM polarization
