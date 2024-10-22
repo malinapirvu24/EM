@@ -14,29 +14,26 @@ M_0 = 4 * pi * 10^(-7);
 polarization = 'TM';
 
 % first medium - vacuum
-E1_r = 1;
-M1_r = 1; 
-n1 = sqrt(E1_r * M1_r);
-E1 = E_0 * E1_r; 
+E1 = 1;
+M1 = 1; 
+n1 = sqrt(E1 * M1); 
 k1 = 2*pi*f*n1/c_0;
 
 % second medium - layer
-E2_r = 1;
-M2_r = 5; 
+E2 = 1;
+M2 = 5; 
 h = 1 * 10^-2;  % from cm to m
-n2 = sqrt(E2_r * M2_r);
-E2 = E_0 * E2_r;
+n2 = sqrt(E2 * M2);
 k2 = 2*pi*f*n2/c_0;
 
 % third medium - substrate
-E3_r = 1.25;
-M3_r = 1; 
-n3 = sqrt(E3_r * M3_r);
-E3 = E_0 * E3_r;
+E3 = 1.25;
+M3 = 1; 
+n3 = sqrt(E3 * M3);
 k3 = 2*pi*f*n3/c_0;
 
 % define the ratio between first and third medium
-ratio = sqrt((M3_r/E3_r)/(M1_r/E1_r));
+ratio = sqrt((M3/E3)/(M1/E1));
 
 
 %% Compute solution
@@ -62,8 +59,8 @@ for theta = 0 : 90
     B = A_inv * C;   
     Bs(counter, :) = B;
   
-    S1z_module(counter) =  (1/sqrt(M1_r/E1_r))*(1 - (abs(Bs(counter,1))).^2).* cosd(theta);
-    S3z_module(counter) =  (1/sqrt(M3_r/E3_r))*ratio.^2*(abs(Bs(counter,2))).^2.* cos(asin(k1*sind(theta)/k3));
+    S1z_module(counter) =  (1/sqrt(M1/E1))*(1 - (abs(Bs(counter,1))).^2).* cosd(theta);
+    S3z_module(counter) =  (1/sqrt(M3/E3))*ratio.^2*(abs(Bs(counter,2))).^2.* cos(asin(k1*sind(theta)/k3));
 
 end
 
@@ -83,8 +80,7 @@ legend([reflection; transmission], "reflection", "transmission")
 title("Reflection and transmission coefficients")
 xlabel("\theta_i [degree]")
 xlim([0,90])
-ylabel("Coefficient - module")
-
+ylabel("Absolute value")
 
 %% Energy conservation
 
@@ -95,7 +91,7 @@ hold on
 S1z = plot(theta, abs(S1z_module),'LineWidth', 5);
 S3z = plot(theta, abs(S3z_module),'LineWidth', 2, "Color", "magenta");
 diff = plot(theta, abs(S1z_module) - abs(S3z_module) ,'LineWidth', 3, "Color", "black");
-legend([S1z; S3z; diff], "|S1z|", "|S3z|", "|S1z|+|S3z|")
+legend([S1z; S3z; diff], "|S1z|", "|S3z|", "|S1z|-|S3z|")
 title("Conservation of energy")
 xlabel("\theta_i [degree]")
 xlim([0,90])

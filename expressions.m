@@ -14,21 +14,16 @@ M_0 = 4 * pi * 10^(-7);
 polarization = 'TM';
 
 % first medium - vacuum
-E1_r = 1;
-M1_r = 1; 
-E1 = sym('E1'); 
+E1 = 1;
+M1 = 1; 
 k1 = sym('k1');
 
 % second medium - layer
-E2_r = 1;
-M2_r = 5; 
 h = sym('h');  
 E2 = sym('E2');
 k2 = sym('k2');
 
 % third medium - substrate
-E3_r = 1.25;
-M3_r = 1; 
 E3 = sym('E3');
 k3 = sym('k3');
 
