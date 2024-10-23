@@ -69,6 +69,9 @@ gamma_2_true_value = 0.732039;
 gamma_1 = abs(Bs(16,1)); % theta+1 - Matlab indexing
 gamma_2 = abs(Bs(46,1)); % theta+1 - Matlab indexing
 
+f1 = gamma_1 - gamma_1_true_value;
+f2 = gamma_2 - gamma_2_true_value;
+
 %% Search space
 
 E2_values = linspace(0.8, 1.2, 21); % 1
@@ -78,7 +81,7 @@ for i = 1:length(E2_values)
     for j = 1:length(H_values)
         E2_value = E2_values(i);
         H_value = H_values(j);
-        expr = (gamma_1 - gamma_1_true_value) + (gamma_2 - gamma_2_true_value);
+        expr = f1^2 + f2^2;
         substituted_expr = subs(expr, [E2, h], [E2_value, H_value]);
         cost(i, j) = 1 / substituted_expr;
         
@@ -92,7 +95,7 @@ end
 figure;  
 mesh(E2Grid, HGrid, abs(cost));  
 xlabel('ε2');  
-ylabel('H');  
+ylabel('h[m]');  
 zlabel('Cost');  
 title('Mesh Plot of Cost Function'); 
 
